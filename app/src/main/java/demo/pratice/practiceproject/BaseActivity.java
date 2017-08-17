@@ -3,26 +3,18 @@ package demo.pratice.practiceproject;
 import android.app.ProgressDialog;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
 import android.view.Gravity;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-import com.trello.rxlifecycle.components.support.RxFragmentActivity;
-
 import butterknife.ButterKnife;
-import demo.pratice.practiceproject.service.Service;
-import demo.pratice.practiceproject.service.ServiceManager;
-import demo.pratice.practiceproject.utils.CheckLogoutOperator;
-import demo.pratice.practiceproject.utils.RxAndroidUtil;
-import rx.Observable;
-import rx.functions.Action0;
-import rx.functions.Action1;
 
 
 /**
- * Created by jwmeng on 2015/5/7.
+ * Created by yb on 2017/8/15.
  */
-public class BaseActivity extends RxFragmentActivity {
+public class BaseActivity extends FragmentActivity {
 
     private ProgressDialog progressDialog;
 
@@ -95,29 +87,7 @@ public class BaseActivity extends RxFragmentActivity {
             e.printStackTrace();
         }
     }
-
-    protected Service getService() {
-        return ServiceManager.getInstance().getService();
-    }
-
-    protected <T> void subscribe(Observable<T> observable, Action1<T> onNext) {
-        RxAndroidUtil.subscribe(this, toCheckoutLogoutObservable(observable), onNext, this::handleError);
-    }
-
-    protected <T> void subscribe(Observable<T> observable, Action1<T> onNext, Action0 onComplete) {
-        RxAndroidUtil.subscribe(this, toCheckoutLogoutObservable(observable), onNext, this::handleError, onComplete);
-    }
-
-    protected <T> void subscribe(Observable<T> observable, Action1<T> onNext, Action1<Throwable> onError) {
-        RxAndroidUtil.subscribe(this, toCheckoutLogoutObservable(observable), onNext, onError);
-    }
-
     protected void handleError(Throwable t) {
         hideProgressDialog();
     }
-
-    private <T> Observable<T> toCheckoutLogoutObservable(Observable<T> observable) {
-        return observable.lift(new CheckLogoutOperator<>());
-    }
-
 }

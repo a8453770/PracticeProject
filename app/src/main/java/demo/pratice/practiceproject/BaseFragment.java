@@ -10,16 +10,10 @@ import android.view.ViewParent;
 import android.widget.Toast;
 
 import butterknife.ButterKnife;
-import demo.pratice.practiceproject.service.Service;
-import demo.pratice.practiceproject.service.ServiceManager;
-import demo.pratice.practiceproject.utils.RxAndroidUtil;
-import rx.Observable;
-import rx.functions.Action0;
-import rx.functions.Action1;
 
 
 /**
- * Created by jwmeng on 11/5/15.
+ * Created by yb on 2017/8/15.
  */
 public abstract class BaseFragment extends Fragment {
 
@@ -74,21 +68,4 @@ public abstract class BaseFragment extends Fragment {
         toast.setGravity(Gravity.CENTER, 0, 0);
         toast.show();
     }
-
-    protected Service getService() {
-        return ServiceManager.getInstance().getService();
-    }
-
-    protected <T> void subscribe(Observable<T> observable, Action1<T> onNext) {
-        RxAndroidUtil.subscribe(activity, activity.toCheckoutLogoutObservable(observable), onNext, activity::handleError);
-    }
-
-    protected <T> void subscribe(Observable<T> observable, Action1<T> onNext, Action0 onComplete) {
-        RxAndroidUtil.subscribe(activity, activity.toCheckoutLogoutObservable(observable), onNext, activity::handleError, onComplete);
-    }
-
-    protected <T> void subscribe(Observable<T> observable, Action1<T> onNext, Action1<Throwable> onError, Action0 onComplete) {
-        RxAndroidUtil.subscribe(activity, activity.toCheckoutLogoutObservable(observable), onNext, onError, onComplete);
-    }
-
 }

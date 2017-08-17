@@ -1,13 +1,13 @@
 package demo.pratice.practiceproject;
 
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
-
-public class MainActivity extends AppCompatActivity {
+/**
+ * Created by yb on 2017/8/15.
+ */
+public class MainActivity extends BaseActivity {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    protected void setRootView() {
+        super.setRootView();
         setContentView(R.layout.activity_main);
     }
 }
